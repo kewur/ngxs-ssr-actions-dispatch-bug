@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import {Store} from '@ngxs/store';
-import {CurrentUserModel, CurrentUserState, RequestUserTasks} from './state';
+import {CurrentUserModel, CurrentUserState} from './state';
 import {Observable} from 'rxjs';
 import {AsyncPipe, JsonPipe} from '@angular/common';
+import {RequestUserTasks} from './actions';
 
 @Component({
     selector: 'app-root',

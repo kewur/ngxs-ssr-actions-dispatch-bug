@@ -11,6 +11,7 @@ import {
 import { buffer, debounceTime, map, tap } from 'rxjs/operators';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import {isPlatformServer} from '@angular/common';
+import {FetchUserTasks, RequestUserTasks, SetSomeData} from './actions';
 
 export const CURRENT_USER_TOKEN = new StateToken<CurrentUserModel>(
   'currentUser'
@@ -19,6 +20,7 @@ export const CURRENT_USER_TOKEN = new StateToken<CurrentUserModel>(
 export interface CurrentUserModel {
   displayName: string | null;
   isFetchingTasks: boolean;
+  someData: string;
 }
 
 @State<CurrentUserModel>({
@@ -26,6 +28,7 @@ export interface CurrentUserModel {
   defaults: {
     displayName: null,
     isFetchingTasks: false,
+    someData: ''
   },
 })
 @Injectable()
@@ -73,15 +76,11 @@ export class CurrentUserState {
       isFetchingTasks: true,
     });
   }
-}
-export class RequestUserTasks {
-  static readonly type = '[USER] RequestUserTasks';
 
-  constructor(public readonly fetchCount: number) {}
-}
-
-export class FetchUserTasks {
-  static readonly type = '[USER] FetchUserTasks';
-
-  constructor(public readonly fetchCount: number) {}
+  @Action(SetSomeData)
+  public setSomeData(context: StateContext<CurrentUserModel>, { data }: SetSomeData) {
+    context.patchState({
+      someData: data,
+    });
+  }
 }
