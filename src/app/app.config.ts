@@ -11,7 +11,8 @@ import {withNgxsLoggerPlugin} from '@ngxs/logger-plugin';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideExperimentalZonelessChangeDetection(),
+    // provideZoneChangeDetection({eventCoalescing: true}),
+    provideExperimentalZonelessChangeDetection(), // <!--- CRASHES NGXS
     provideRouter(routes), provideClientHydration(),
     provideStore([CurrentUserState]),
     withNgxsReduxDevtoolsPlugin({
