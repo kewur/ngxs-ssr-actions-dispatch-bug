@@ -14,13 +14,14 @@ export const appConfig: ApplicationConfig = {
     // provideZoneChangeDetection({eventCoalescing: true}),
     provideExperimentalZonelessChangeDetection(), // <!--- CRASHES NGXS
     provideRouter(routes), provideClientHydration(),
-    provideStore([CurrentUserState]),
-    withNgxsReduxDevtoolsPlugin({
-      disabled: false,
-    }),
-    withNgxsLoggerPlugin({
-      collapsed: true,
-      disabled: true,
-    }),
-    withNgxsPendingTasks(),]
+    provideStore([CurrentUserState],
+      withNgxsPendingTasks(),
+      withNgxsReduxDevtoolsPlugin({
+        disabled: false,
+      }),
+      withNgxsLoggerPlugin({
+        collapsed: true,
+        disabled: true,
+      })),
+]
 };
